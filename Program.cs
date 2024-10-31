@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SupermarketWEB.Data;
-using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace SupermarketWEB
 {
@@ -11,21 +9,23 @@ namespace SupermarketWEB
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Agregar servicios al contenedor.
             builder.Services.AddRazorPages();
 
-            // Agregando el contexto SupermarketContext a la aplicacion
+            // Definir la cadena de conexión directamente en el código
+            var connectionString = "Data Source=(localdb)\\mssqllocalDB;Database=SupermarketEF;Trusted_Connection=True;";
+
+            // Agregar el contexto SupermarketContext a la aplicación
             builder.Services.AddDbContext<SupermarketContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SupermarketDB"))
+                options.UseSqlServer(connectionString)
             );
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configurar el pipeline de solicitudes HTTP.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
