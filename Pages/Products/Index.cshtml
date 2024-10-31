@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Products[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Stork)
+                @Html.DisplayNameFor(model => model.Products[0].Stock) <!-- Corregido de Stork a Stock -->
             </th>
             <th>Actions</th>
         </tr>
@@ -35,7 +35,7 @@
                         @Html.DisplayFor(modelItem => item.Price)
                       </td>
                       <td>
-                        @Html.DisplayFor(modelItem => item.Stork)
+                        @Html.DisplayFor(modelItem => item.Stock) <!-- Corregido de Stork a Stock -->
                       </td>
                         <td>
                              <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
@@ -46,9 +46,9 @@
         }
         else
         {
-                 <tr>
-                   <td colspan="4">No products available.</td>
-                </tr>
+                    <tr>
+                        <td colspan="4">No products available.</td>
+                    </tr>
         }
     </tbody>
 </table>
