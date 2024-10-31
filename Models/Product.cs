@@ -16,5 +16,7 @@ namespace SupermarketWEB.Models
         public int CategoryId { get; set; } // Sera la llave foranea
         public Category Category { get; set; } // Propiedad de navegacion
 
+        public int ProviderId { get; set; } // Llave foránea
+        public Provider Provider { get; set; } // Propiedad de navegación
     }
 }

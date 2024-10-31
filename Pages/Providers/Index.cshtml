@@ -1,4 +1,48 @@
 ﻿@page
 @model SupermarketWEB.Pages.Providers.IndexModel
 @{
+    ViewData["Title"] = "Index Providers";
 }
+<h1>Index Providers</h1>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Providers[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Providers[0].ContactInfo)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Providers != null && Model.Providers.Count > 0)
+        {
+            @foreach (var item in Model.Providers)
+            {
+                    <tr>
+                       <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                       </td>
+                      <td>
+                        @Html.DisplayFor(modelItem => item.ContactInfo)
+                      </td>
+                        <td>
+                             <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                             <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+            }
+        }
+        else
+        {
+                    <tr>
+                        <td colspan="3">No providers available.</td>
+                    </tr>
+        }
+    </tbody>
+</table>
