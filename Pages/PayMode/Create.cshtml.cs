@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SupermarketWEB.Data;
 using SupermarketWEB.Models;
 
+// Alias para el espacio de nombres
+using PayModeModel = SupermarketWEB.Models.PayMode;
+
 namespace SupermarketWEB.Pages.PayModes
 {
     public class CreateModel : PageModel
@@ -20,7 +23,7 @@ namespace SupermarketWEB.Pages.PayModes
         }
 
         [BindProperty]
-        public PayMode PayMode { get; set; } = default!;
+        public PayModeModel PayMode { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
