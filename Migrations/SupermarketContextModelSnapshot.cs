@@ -70,10 +70,6 @@ namespace SupermarketWEB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
@@ -81,8 +77,11 @@ namespace SupermarketWEB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PayModeId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(6,2)");
 
                     b.Property<int?>("ProviderId")
                         .HasColumnType("int");
@@ -93,6 +92,8 @@ namespace SupermarketWEB.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("PayModeId");
 
                     b.HasIndex("ProviderId");
 
@@ -121,16 +122,29 @@ namespace SupermarketWEB.Migrations
 
             modelBuilder.Entity("SupermarketWEB.Models.Product", b =>
                 {
-                    b.HasOne("SupermarketWEB.Models.Category", null)
+                    b.HasOne("SupermarketWEB.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("SupermarketWEB.Models.Provider", null)
+                    b.HasOne("SupermarketWEB.Models.PayMode", null)
+                        .WithMany("Products")
+                        .HasForeignKey("PayModeId");
+
+                    b.HasOne("SupermarketWEB.Models.Provider", "Provider")
                         .WithMany("Products")
                         .HasForeignKey("ProviderId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("SupermarketWEB.Models.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SupermarketWEB.Models.PayMode", b =>
                 {
                     b.Navigation("Products");
                 });
