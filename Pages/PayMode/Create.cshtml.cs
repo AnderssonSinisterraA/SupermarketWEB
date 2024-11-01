@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using SupermarketWEB.Data;
 using SupermarketWEB.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace SupermarketWEB.Pages.Products
+namespace SupermarketWEB.Pages.PayModes
 {
     public class CreateModel : PageModel
     {
@@ -19,24 +16,20 @@ namespace SupermarketWEB.Pages.Products
 
         public IActionResult OnGet()
         {
-            CategoryList = new SelectList(_context.Categories, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
-        public Product Product { get; set; } = default!;
-
-        public SelectList CategoryList { get; set; }
+        public PayMode PayMode { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Products == null || Product == null)
+            if (!ModelState.IsValid || _context.PayModes == null || PayMode == null)
             {
-                CategoryList = new SelectList(_context.Categories, "Id", "Name");
                 return Page();
             }
 
-            _context.Products.Add(Product);
+            _context.PayModes.Add(PayMode);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
