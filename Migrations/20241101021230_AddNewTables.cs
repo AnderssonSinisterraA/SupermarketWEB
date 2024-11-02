@@ -4,14 +4,13 @@
 
 namespace SupermarketWEB.Migrations
 {
-    /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddNewTables : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // Crear tabla PayModes
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "PayModes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,25 +20,10 @@ namespace SupermarketWEB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PayModes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Mode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Orders = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
                     table.PrimaryKey("PK_PayModes", x => x.Id);
                 });
 
+            // Crear tabla Providers
             migrationBuilder.CreateTable(
                 name: "Providers",
                 columns: table => new
@@ -54,6 +38,7 @@ namespace SupermarketWEB.Migrations
                     table.PrimaryKey("PK_Providers", x => x.Id);
                 });
 
+            // Crear tabla Products
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -87,6 +72,7 @@ namespace SupermarketWEB.Migrations
                         principalColumn: "Id");
                 });
 
+            // Crear índices
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
@@ -103,14 +89,10 @@ namespace SupermarketWEB.Migrations
                 column: "ProviderId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "PayModes");

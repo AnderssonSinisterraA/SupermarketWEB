@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SupermarketWEB.Data;
-using PayModeModel = SupermarketWEB.Models.PayMode; // Alias para el tipo PayMode
-using System.Threading.Tasks;
+using SupermarketWEB.Models;
+
+// Alias para el espacio de nombres
+using PayModeModel = SupermarketWEB.Models.PayMode;
 
 namespace SupermarketWEB.Pages.PayModes
 {
@@ -17,21 +19,22 @@ namespace SupermarketWEB.Pages.PayModes
         }
 
         [BindProperty]
-        public PayModeModel PayMode { get; set; } // Usa el alias aquí
+        public PayModeModel PayMode { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || _context.PayModes == null)
             {
                 return NotFound();
             }
 
-            PayMode = await _context.PayModes.FindAsync(id);
+            var payMode = await _context.PayModes.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (PayMode == null)
+            if (payMode == null)
             {
                 return NotFound();
             }
+            PayMode = payMode;
             return Page();
         }
 
@@ -59,14 +62,12 @@ namespace SupermarketWEB.Pages.PayModes
                     throw;
                 }
             }
-
             return RedirectToPage("./Index");
         }
 
         private bool PayModeExists(int id)
         {
-            return _context.PayModes.Any(e => e.Id == id);
+            return (_context.PayModes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
     }
 }
