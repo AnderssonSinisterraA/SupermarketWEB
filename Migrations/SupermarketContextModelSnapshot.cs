@@ -22,47 +22,7 @@ namespace SupermarketWEB.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SupermarketWEB.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("SupermarketWEB.Models.PayMode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PayModes");
-                });
-
-            modelBuilder.Entity("SupermarketWEB.Models.Product", b =>
+            modelBuilder.Entity("Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,6 +60,54 @@ namespace SupermarketWEB.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SupermarketWEB.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("SupermarketWEB.Models.PayMode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Orders")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PayModes");
+                });
+
             modelBuilder.Entity("SupermarketWEB.Models.Provider", b =>
                 {
                     b.Property<int>("Id")
@@ -120,13 +128,13 @@ namespace SupermarketWEB.Migrations
                     b.ToTable("Providers");
                 });
 
-            modelBuilder.Entity("SupermarketWEB.Models.Product", b =>
+            modelBuilder.Entity("Product", b =>
                 {
                     b.HasOne("SupermarketWEB.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("SupermarketWEB.Models.PayMode", null)
+                    b.HasOne("SupermarketWEB.Models.PayMode", "PayMode")
                         .WithMany("Products")
                         .HasForeignKey("PayModeId");
 
@@ -135,6 +143,8 @@ namespace SupermarketWEB.Migrations
                         .HasForeignKey("ProviderId");
 
                     b.Navigation("Category");
+
+                    b.Navigation("PayMode");
 
                     b.Navigation("Provider");
                 });
