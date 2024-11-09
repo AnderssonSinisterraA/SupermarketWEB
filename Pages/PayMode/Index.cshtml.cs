@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 // Alias para el espacio de nombres
 using PayModeModel = SupermarketWEB.Models.PayMode;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SupermarketWEB.Pages.PayModes
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly SupermarketContext _context;

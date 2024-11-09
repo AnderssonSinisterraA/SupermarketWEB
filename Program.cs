@@ -20,6 +20,16 @@ namespace SupermarketWEB
                 options.UseSqlServer(connectionString)
             );
 
+            // Agregar servicios de autenticación
+            builder.Services.AddAuthentication("MyCookieAuth")
+                .AddCookie("MyCookieAuth", options =>
+                {
+                    options.Cookie.Name = "MyCookieAuth";
+                    options.LoginPath = "/Account/Login";
+                });
+
+            builder.Services.AddAuthorization();
+
             var app = builder.Build();
 
             // Configurar el pipeline de solicitudes HTTP.
@@ -34,6 +44,7 @@ namespace SupermarketWEB
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
