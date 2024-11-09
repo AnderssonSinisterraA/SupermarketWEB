@@ -9,7 +9,7 @@ namespace SupermarketWEB.Pages.Categories
     public class EditModel : PageModel
     {
         private readonly SupermarketContext _context;
-        
+
         public EditModel(SupermarketContext context)
         {
             _context = context;
@@ -26,7 +26,7 @@ namespace SupermarketWEB.Pages.Categories
                 return NotFound();
             }
 
-           var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
 
             if (category == null)
             {
@@ -39,7 +39,7 @@ namespace SupermarketWEB.Pages.Categories
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            { 
+            {
                 return Page();
             }
 

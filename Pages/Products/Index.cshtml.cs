@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SupermarketWEB.Data;
-using SupermarketWEB.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SupermarketWEB.Pages.Products
 {

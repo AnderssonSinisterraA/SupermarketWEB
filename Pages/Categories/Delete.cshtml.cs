@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using SupermarketWEB.Data;
 using SupermarketWEB.Models;
 
@@ -9,7 +8,7 @@ namespace SupermarketWEB.Pages.Categories
     public class DeleteModel : PageModel
     {
         private readonly SupermarketContext _context;
-       
+
         public DeleteModel(SupermarketContext context)
         {
             _context = context;
@@ -29,7 +28,7 @@ namespace SupermarketWEB.Pages.Categories
 
             if (category != null)
             {
-               Category = category;
+                Category = category;
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
             }

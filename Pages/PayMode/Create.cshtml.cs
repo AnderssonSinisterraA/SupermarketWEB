@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SupermarketWEB.Data;
 using PayModeModel = SupermarketWEB.Models.PayMode; // Alias para el tipo PayMode
-using System.Threading.Tasks;
 
 namespace SupermarketWEB.Pages.PayModes
 {

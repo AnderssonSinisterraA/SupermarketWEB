@@ -15,6 +15,6 @@ public class Product
     public Provider Provider { get; set; }
 
     // Agregar la propiedad PayModeId
- //   public int? PayModeId { get; set; }
- //   public PayMode PayMode { get; set; }
+    //   public int? PayModeId { get; set; }
+    //   public PayMode PayMode { get; set; }
 }

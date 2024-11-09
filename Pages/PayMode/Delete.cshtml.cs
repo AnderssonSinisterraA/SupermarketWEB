@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using SupermarketWEB.Data;
-using SupermarketWEB.Models;
 
 // Alias para el espacio de nombres
 using PayModeModel = SupermarketWEB.Models.PayMode;
